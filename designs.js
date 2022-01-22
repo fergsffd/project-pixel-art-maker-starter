@@ -8,15 +8,19 @@ const colorChoice = document.getElementById('colorPicker');
 const theCanvas = document.getElementById('pixelCanvas');
 
 // When size is submitted by the user, call makeGrid()
-submitGrid.addEventListener('submit', makeGrid);
+submitGrid.addEventListener('submit', function(event) {
+                            makeGrid();
+                            event.preventDefault(); }
+                           ); // Need this to get form not to reset?
 
 function makeGrid() {
+  const myCustDiv = document.createElement('div');
   let msg = "height: " + this.inputHeight.value +
     "\nwidth: " + this.inputWidth.value;
 let row = 1;
-  for(row; row <= this.inputHeight.value; row++) {
+  for(row; row <= 30 /*this.inputHeight.value*/; row++) {
     const newRowElement = document.createElement('tr');
-    for(let col = 1; col <= this.inputWidth.value; col++) {
+    for(let col = 1; col <= 30 /*this.inputHeight.value*/; col++) {
         const newColElement = document.createElement('td');
         newColElement.addEventListener('click',function() {
           alert("click on box");
@@ -24,9 +28,12 @@ let row = 1;
         theCanvas.appendChild(newColElement);
     }
     theCanvas.appendChild(newRowElement);
+
   }
+  document.body.appendChild(myCustDiv);
   pixelColor = colorChoice.value;
   msg += "\nLooped " + row + " times.";
   msg +="\nColor: " + pixelColor;
   //alert(msg);
+
 }
