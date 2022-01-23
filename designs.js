@@ -13,24 +13,36 @@ submitGrid.addEventListener('submit', function(event) {
                             event.preventDefault(); }
                            ); // Need this to get form not to reset?
 
+function cellColorChange() {
+  alert("clicked on box");
+}
+
 function makeGrid() {
-  const myCustDiv = document.createElement('div');
+
   let msg = "height: " + this.inputHeight.value +
     "\nwidth: " + this.inputWidth.value;
-let row = 1;
+  let row = 1;
+
   for(row; row <= 30 /*this.inputHeight.value*/; row++) {
     const newRowElement = document.createElement('tr');
-    for(let col = 1; col <= 30 /*this.inputHeight.value*/; col++) {
-        const newColElement = document.createElement('td');
-        newColElement.addEventListener('click',function() {
-          alert("click on box");
-        });
-        theCanvas.appendChild(newColElement);
+    //theCanvas.appendChild(newRowElement);
+    for(let col = 0; col < 30 /*this.inputHeight.value*/; col++) {
+        newRowElement.insertCell(col);
+        newRowElement.rows[row].cells[col].innerText = 'z';
+        //newRowElement.getElementsByClassName('td').addEventListener('click',cellColorChange);
+        //theCanvas.getElementsByClassName('td').innerText = 'x';
+
+        theCanvas.appendChild(newRowElement);
+        const newCell = theCanvas.getElementsByTagName('td');
+        newCell.textContent ='x';
+        //theCanvas.insertAdjacentHTML('beforeend',newRowElement);
+        //theCanvas.getElementsByClassName('td').innerText = 'x';
+
     }
-    theCanvas.appendChild(newRowElement);
+
 
   }
-  document.body.appendChild(myCustDiv);
+
   pixelColor = colorChoice.value;
   msg += "\nLooped " + row + " times.";
   msg +="\nColor: " + pixelColor;
