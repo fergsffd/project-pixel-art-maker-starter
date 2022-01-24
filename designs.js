@@ -13,10 +13,10 @@ submitGrid.addEventListener('submit', function(event) {
                             event.preventDefault(); }
                            ); // Need this to get form not to reset?
 
-function cellColorChange() {
-  let pixelColor = colorChoice.value;
-
-  alert("clicked on box");
+function cellColorChange(item) {
+  item.style.bgColor = colorChoice.value;
+  alert("clicked on box, " + item);
+  console.log(Object.keys(item));
 }
 
 function makeGrid() {
@@ -32,10 +32,18 @@ function makeGrid() {
     }  // col loop
   }  // row loop
 
-  let td = theCanvas.querySelectorAll('td');
+  const td = theCanvas.querySelectorAll('td');
+  //alert("td count= "+td.length);
+  //td.style.bgColor = colorChoice.value;
   //alert("td length= " + td.length);
+  let c =0;
   td.forEach(function(tdItem) {
-    tdItem.addEventListener('click',cellColorChange);
+    if(c===1) { console.log("tdItem: " + Object.keys(tdItem));}
+    tdItem.addEventListener('click',function() {
+      //tdItem.style.bgColor = 'green'; //colorChoice.value;
+      cellColorChange(tdItem);
+      c++;
+    });
   });
 
 
