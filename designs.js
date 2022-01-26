@@ -26,9 +26,9 @@ function cellColorChange(myCell) {
 // Probably a good idea to pass parameters to function and not use globals.
 function makeGrid(width, height) {
   theCanvas.textContent = ""; // reset canvas
-  for (let row = 1; row < width; row++) {
+  for (let row = 0; row < height; row++) {
       const newRowElement = document.createElement('tr');
-      for (let col = 0; col <= height; col++) {
+      for (let col = 0; col < width; col++) {
           newRowElement.insertCell(col);
           theCanvas.appendChild(newRowElement);
       }  // col loop
